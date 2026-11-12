@@ -1,22 +1,27 @@
 #include <QPushButton>
 #include <QLabel>
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "mainwindow.h"     // MainWindow class define
+#include "ui_mainwindow.h"  // UI code form `mainwindow.ui`
 
+// Constructor
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow(parent)           // init window
+    , ui(new Ui::MainWindow)        // create ui
 {
-    ui->setupUi(this);
+    // create button
+    ui->setupUi(this);              // set ui
     auto *button = new QPushButton("押してみる", this);
-    button->move(150, 100);
-    button->show();
+    button->move(150, 100);         // locate button
+    button->show();                 // show button
 
+    // connects click to action
+    // * [this]() { ... } : lambda
     connect(button, &QPushButton::clicked, this, [this]() {
         ui->label->setText("クリックされました");
     });
 }
 
+// Distructor
 MainWindow::~MainWindow()
 {
     delete ui;
